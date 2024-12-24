@@ -1,15 +1,17 @@
 package com.gkd.redis_spring.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
+@Data
 @Setter
 public class Categorie {
     @Id
@@ -20,7 +22,8 @@ public class Categorie {
     private String nom;
 
     @OneToMany(mappedBy = "categorie", orphanRemoval = true)
-    private Set<Produit> produits = new LinkedHashSet<>();
+    @JsonIgnore
+    private List<Produit> produits;
 
 
     // Getters et Setters
